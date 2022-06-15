@@ -6,17 +6,14 @@ export function bingTranslate(word: string) {
   const queryWordUrl = `https://cn.bing.com/dict/search?q=${encodeURI(word)}`;
 
   axios.get(queryWordUrl).then((response) => {
-    console.warn(
-      `=================== Bing Translate: ${word} ===================`
-    );
-
     const html = response.data;
-    parsePhonetic(html);
+    const phonetic = parsePhonetic(html);
+    console.log(`${word}: [${phonetic}]`);
     parseExplains(html);
     parseForms(html);
     parsePhrase(html);
 
-    parseParaphrase(html);
+    // parseParaphrase(html);
 
     const audioUrl = parseAudioUrl(html);
     if (audioUrl) {
@@ -60,10 +57,8 @@ export function parsePhonetic(html: string) {
   let phonetic;
   // '美 [ɡʊd]'
   const pronounceText = $(".hd_p1_1>.hd_prUS").text();
-  console.warn(`pronounceText: ${pronounceText}`);
   if (pronounceText) {
     phonetic = pronounceText.split("[")[1].split("]")[0];
-    console.warn(`phonetic: [${phonetic}]`);
   }
 
   return phonetic;
@@ -89,7 +84,11 @@ export function parseExplains(html: string) {
 
   let data: string[] = [];
   for (const element of $(".qdef>ul>li")) {
-    const part = $(element).find(".pos").text();
+    let part = $(element).find(".pos").text();
+    if (part === "网络") {
+      part = "网络释义.";
+    }
+
     const meam = $(element).find(".def").text();
     const partMean = `${part} ${meam}`;
 
@@ -104,7 +103,7 @@ export function parseForms(html: string) {
   const $ = cheerio.load(html);
   const fomrs = $(".hd_div1>.hd_if").text();
   if (fomrs) {
-    console.warn(`forms: ${fomrs}`);
+    console.warn(`${fomrs}`);
   }
   return fomrs;
 }
@@ -124,14 +123,10 @@ export function parsePhrase(html: string) {
       $(".val", element).text()
     );
   });
+  console.log("\n");
 
-  if (titles.length) {
-    console.log("");
-    console.warn(`------------------ phrase ------------------`);
-  }
-
-  for (let i = 0; i < titles.length; i++) {
-    console.log("\n");
+  for (let i = 0; i < Math.min(titles.length, 3); i++) {
+    // console.log("\n");
     console.warn(`${titles[i]}`);
     console.warn(`${subtitles[i]}`);
   }

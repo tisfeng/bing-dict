@@ -7,8 +7,7 @@ let audioDirPath = path.resolve(__dirname, "../audio");
 // console.log(`audioDirPath:`, audioDirPath);
 
 export function playAudio(audioPath: string) {
-  console.log(`audioPath: ${audioDirPath}`);
-  console.log(`play audio: ${audioPath}`);
+  // console.log(`play audio: ${audioPath}`);
   if (!fs.existsSync(audioPath)) {
     console.error(`audio file not exists: ${audioPath}`);
     return;
@@ -27,12 +26,12 @@ export function downloadWordAudio(
   callback?: () => void
 ) {
   if (fs.existsSync(audioPath)) {
-    console.log(`audio file already exists: ${audioPath}`);
+    // console.log(`audio file already exists: ${audioPath}`);
     callback && callback();
     return;
   }
 
-  console.log(`download url audio: ${url}`);
+  // console.log(`download url audio: ${url}`);
   axios({
     method: "get",
     url: url,
@@ -53,7 +52,7 @@ export function downloadWordAudio(
 // function: get audio file name, if audio directory is empty, create it
 export function getWordAudioPath(word: string) {
   if (!fs.existsSync(audioDirPath)) {
-    console.log(`create directory: ${audioDirPath}`);
+    // console.log(`create directory: ${audioDirPath}`);
     fs.mkdirSync(`${audioDirPath}`);
   }
   return `${audioDirPath}/${word}.mp3`;
