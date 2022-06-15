@@ -86,7 +86,7 @@ export function parseExplains(html: string) {
   for (const element of $(".qdef>ul>li")) {
     let part = $(element).find(".pos").text();
     if (part === "网络") {
-      part = "网络释义.";
+      part = "网络：";
     }
 
     const meam = $(element).find(".def").text();
@@ -123,12 +123,12 @@ export function parsePhrase(html: string) {
       $(".val", element).text()
     );
   });
-  console.log("\n");
+  console.log("");
 
   for (let i = 0; i < Math.min(titles.length, 3); i++) {
-    // console.log("\n");
     console.warn(`${titles[i]}`);
     console.warn(`${subtitles[i]}`);
+    console.log("");
   }
 
   return titles.map((i, element) => {
