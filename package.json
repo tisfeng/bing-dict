@@ -1,0 +1,22 @@
+{
+  "name": "bing",
+  "version": "1.0.0",
+  "description": "a bing crawler dict",
+  "main": "index.ts",
+  "bin": {
+    "bing": "index.ts"
+  },
+  "scripts": {
+    "test": "bing"
+  },
+  "keywords": [
+    "bing",
+    "dict",
+    "crawler"
+  ],
+  "author": "isfeng",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^17.0.43"
+  }
+}
