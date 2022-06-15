@@ -140,20 +140,3 @@ export function parsePhrase(html: string) {
     `${titles[i]} ${subtitles[i]}`;
   });
 }
-
-/**
-<ul id="fruits">
-  <li class="apple">Apple</li>
-  <li class="orange">Orange</li>
-  <li class="pear">Pear</li>
-</ul>
-
-$('.apple', '#fruits').text()
-//=> Apple
-
-$('ul .pear').attr('class')
-//=> pear
-
-$('li[class=orange]').html()
-//=> Orange
- */

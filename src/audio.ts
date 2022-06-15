@@ -1,9 +1,10 @@
 import axios from "axios";
 import { execFile } from "child_process";
 import fs from "fs";
+import path from "path";
 
-let audioDirPath = `${process.argv[1]}/audio`;
-console.log(`audioDirPath:`, audioDirPath);
+let audioDirPath = path.resolve(__dirname, "../audio");
+// console.log(`audioDirPath:`, audioDirPath);
 
 export function playAudio(audioPath: string) {
   console.log(`audioPath: ${audioDirPath}`);
@@ -51,10 +52,9 @@ export function downloadWordAudio(
 
 // function: get audio file name, if audio directory is empty, create it
 export function getWordAudioPath(word: string) {
-  const wordAudioPath = `${audioDirPath}/${word}.mp3`;
   if (!fs.existsSync(audioDirPath)) {
     console.log(`create directory: ${audioDirPath}`);
-    fs.mkdirSync(`${audioDirPath}/audio`);
+    fs.mkdirSync(`${audioDirPath}`);
   }
   return `${audioDirPath}/${word}.mp3`;
 }
