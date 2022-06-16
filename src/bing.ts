@@ -4,6 +4,10 @@ import { downloadWordAudio, getWordAudioPath, playAudio } from "./audio";
 
 import sound from "sound-play";
 
+import playerImport = require("play-sound");
+
+const player = playerImport({});
+
 export default function bingTranslate(word: string) {
   const queryWordUrl = `https://cn.bing.com/dict/search?q=${encodeURI(word)}`;
 
@@ -27,7 +31,11 @@ export default function bingTranslate(word: string) {
         // playAudio(audioPath);
         console.log(`play audio: ${audioPath}`);
 
-        sound.play(audioPath);
+        // sound.play(audioPath);
+
+        player.play(audioPath, (err) => {
+          if (err) throw err;
+        });
       });
     }
   });
