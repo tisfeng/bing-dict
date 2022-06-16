@@ -2,9 +2,9 @@
   "name": "bing",
   "version": "1.0.0",
   "description": "A Bing command line dictionary, which obtains the query results of bing dictionary by crawler.",
-  "main": "bing-cli.ts",
+  "main": "index.ts",
   "bin": {
-    "bing": "./lib/bing-cli.js"
+    "bing": "./lib/index.js"
   },
   "scripts": {
     "build": "tsc",
