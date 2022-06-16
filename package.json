@@ -1,5 +1,5 @@
 {
-  "name": "bing",
+  "name": "@isfeng/bing-dict",
   "version": "1.0.0",
   "description": "A Bing command line dictionary, which obtains the query results of bing dictionary by crawler.",
   "main": "index.ts",
