@@ -3,7 +3,7 @@ import { execFile } from "child_process";
 import fs from "fs";
 import path from "path";
 
-let audioDirPath = path.resolve(__dirname, "../audio");
+const audioDirPath = path.resolve(__dirname, "../audio");
 // console.log(`audioDirPath:`, audioDirPath);
 
 export function playAudio(audioPath: string) {
@@ -12,7 +12,7 @@ export function playAudio(audioPath: string) {
     console.error(`audio file not exists: ${audioPath}`);
     return;
   }
-  execFile("afplay", [audioPath], (error, stdout, stderr) => {
+  execFile("afplay", [audioPath], (error, stdout) => {
     if (error) {
       console.error(`exec error: ${error}`);
     }
@@ -39,9 +39,14 @@ export function downloadWordAudio(
   })
     .then((response) => {
       response.data.pipe(
-        fs
-          .createWriteStream(audioPath)
-          .on("close", callback ? callback : () => {})
+        fs.createWriteStream(audioPath).on(
+          "close",
+          callback
+            ? callback
+            : () => {
+                // do nothing
+              }
+        )
       );
     })
     .catch((error) => {

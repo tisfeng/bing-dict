@@ -8,7 +8,9 @@ export function bingTranslate(word: string) {
   axios.get(queryWordUrl).then((response) => {
     const html = response.data;
     const phonetic = parsePhonetic(html);
-    console.log(`${word}: [${phonetic}]`);
+    if (phonetic) {
+      console.log(`${word}: [${phonetic}]`);
+    }
     parseExplains(html);
     parseForms(html);
     parsePhrase(html);
@@ -82,7 +84,7 @@ export function parseAudioUrl(html: string) {
 export function parseExplains(html: string) {
   const $ = cheerio.load(html);
 
-  let data: string[] = [];
+  const data: string[] = [];
   for (const element of $(".qdef>ul>li")) {
     let part = $(element).find(".pos").text();
     if (part === "网络") {
@@ -131,7 +133,7 @@ export function parsePhrase(html: string) {
     console.log("");
   }
 
-  return titles.map((i, element) => {
+  return titles.map((i) => {
     `${titles[i]} ${subtitles[i]}`;
   });
 }
