@@ -11,15 +11,17 @@ export default function bingTranslate(word: string) {
   axios.get(queryWordUrl).then((response) => {
     const html = response.data;
     const phonetic = parsePhonetic(html);
+
+    console.log("");
     if (phonetic) {
-      console.log("");
       console.log(
-        `${chalk.cyanBright(`${word}`)}: ${chalk.cyanBright(`[${phonetic}]`)}`
+        `${chalk.magenta(`${word}`)}: ${chalk.magenta(`[${phonetic}]`)}`
       );
     }
     parseExplains(html);
     parseForms(html);
     parsePhrase(html);
+    console.log("");
 
     // parse paraphrase(html);
 
@@ -41,7 +43,10 @@ export function parsePhonetic(html: string) {
   let phonetic;
   const pronounceText = $(".hd_p1_1>.hd_prUS").text(); // '美 [ɡʊd]'
   if (pronounceText) {
-    phonetic = pronounceText.split("[")[1].split("]")[0];
+    phonetic = pronounceText.split("[")[1];
+    if (phonetic) {
+      phonetic = phonetic.split("]")[0];
+    }
   }
   return phonetic;
 }
@@ -74,6 +79,9 @@ export function parseExplains(html: string) {
     data.push(partMean);
     console.log(`${chalk.green(part)} ${chalk.greenBright(meam)}`);
   }
+  if (data.length === 0) {
+    console.log(`${chalk.red("emmmm, no explain 😭")}`);
+  }
   return data;
 }
 
@@ -102,11 +110,10 @@ export function parsePhrase(html: string) {
       $(".val", element).text()
     );
   });
-  console.log("");
   for (let i = 0; i < Math.min(titles.length, 3); i++) {
+    console.log("");
     console.log(chalk.whiteBright(titles[i]));
     console.log(chalk.white(subtitles[i]));
-    console.log("");
   }
   return titles.map((i) => {
     `${titles[i]} ${subtitles[i]}`;
