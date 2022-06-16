@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { bingTranslate } from "./bing";
+import bingTranslate from "./bing";
 
 const word = process.argv[2];
 if (word.trim().length) {

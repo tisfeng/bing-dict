@@ -2,7 +2,9 @@ import * as cheerio from "cheerio";
 import axios from "axios";
 import { downloadWordAudio, getWordAudioPath, playAudio } from "./audio";
 
-export function bingTranslate(word: string) {
+import sound from "sound-play";
+
+export default function bingTranslate(word: string) {
   const queryWordUrl = `https://cn.bing.com/dict/search?q=${encodeURI(word)}`;
 
   axios.get(queryWordUrl).then((response) => {
@@ -15,13 +17,17 @@ export function bingTranslate(word: string) {
     parseForms(html);
     parsePhrase(html);
 
-    // parseParaphrase(html);
+    // parse paraphrase(html);
 
     const audioUrl = parseAudioUrl(html);
+
     if (audioUrl) {
       const audioPath = getWordAudioPath(word);
       downloadWordAudio(audioUrl, audioPath, () => {
-        playAudio(audioPath);
+        // playAudio(audioPath);
+        console.log(`play audio: ${audioPath}`);
+
+        sound.play(audioPath);
       });
     }
   });
