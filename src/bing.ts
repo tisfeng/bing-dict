@@ -2,10 +2,7 @@ import * as cheerio from "cheerio";
 import axios from "axios";
 import { downloadWordAudio, getWordAudioPath, playAudio } from "./audio";
 
-import sound from "sound-play";
-
 import playerImport = require("play-sound");
-
 const player = playerImport({});
 
 export default function bingTranslate(word: string) {
@@ -28,11 +25,6 @@ export default function bingTranslate(word: string) {
     if (audioUrl) {
       const audioPath = getWordAudioPath(word);
       downloadWordAudio(audioUrl, audioPath, () => {
-        // playAudio(audioPath);
-        console.log(`play audio: ${audioPath}`);
-
-        // sound.play(audioPath);
-
         player.play(audioPath, (err) => {
           if (err) throw err;
         });
