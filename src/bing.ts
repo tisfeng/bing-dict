@@ -12,7 +12,10 @@ export default function bingTranslate(word: string) {
     const html = response.data;
     const phonetic = parsePhonetic(html);
     if (phonetic) {
-      console.log(chalk.cyan(`\n${word}: [${phonetic}]`));
+      console.log("");
+      console.log(
+        `${chalk.cyanBright(`${word}`)}: ${chalk.cyanBright(`[${phonetic}]`)}`
+      );
     }
     parseExplains(html);
     parseForms(html);
@@ -68,9 +71,8 @@ export function parseExplains(html: string) {
     }
     const meam = $(element).find(".def").text();
     const partMean = `${part} ${meam}`;
-
     data.push(partMean);
-    console.log(chalk.green(partMean));
+    console.log(`${chalk.green(part)} ${chalk.greenBright(meam)}`);
   }
   return data;
 }
@@ -101,13 +103,11 @@ export function parsePhrase(html: string) {
     );
   });
   console.log("");
-
   for (let i = 0; i < Math.min(titles.length, 3); i++) {
     console.log(chalk.whiteBright(titles[i]));
     console.log(chalk.white(subtitles[i]));
     console.log("");
   }
-
   return titles.map((i) => {
     `${titles[i]} ${subtitles[i]}`;
   });
@@ -132,7 +132,7 @@ export function parseParaphrase(html: string) {
       const arr = descriptionText.split("，");
       if (arr.shift()) {
         const paraphrase = arr.join("，");
-        console.log(chalk.green(paraphrase));
+        console.log(chalk.whiteBright(paraphrase));
       }
     }
   }
