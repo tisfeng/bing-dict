@@ -1,6 +1,6 @@
 import * as cheerio from "cheerio";
 import axios from "axios";
-import { downloadWordAudio, getWordAudioPath, playAudio } from "./audio";
+import { downloadWordAudio, getWordAudioPath } from "./audio";
 
 import playerImport = require("play-sound");
 const player = playerImport({});
