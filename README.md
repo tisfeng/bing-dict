@@ -15,11 +15,12 @@ npm install -g @isfeng/bing-dict
 For example, look up word `look`:
 
 ```bash
-bing look
+bing good
 ```
 
-![](https://cdn.jsdelivr.net/gh/tisfeng/ImageBed@main/uPic/lwJd4G.png)
+![good](https://raw.githubusercontent.com/tisfeng/ImageBed/main/uPic/wG8veI-1658410317.png)
 
-[Bing Dictionary](https://cn.bing.com/dict/search?q=look)
 
-![](https://cdn.jsdelivr.net/gh/tisfeng/ImageBed@main/uPic/pAZ3CD.png)
+[Bing Dictionary](https://cn.bing.com/dict/search?q=good)
+
+![](https://raw.githubusercontent.com/tisfeng/ImageBed/main/uPic/8R3a60-1658410447.png)
